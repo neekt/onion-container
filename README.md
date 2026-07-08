@@ -104,11 +104,9 @@ Click the toolbar icon, or right-click a link/page:
 - **Destroy container** (toolbar menu) - click it once to reveal an inline
   "Yes, destroy it" / "Cancel" confirmation; confirming closes all its tabs
   and deletes it outright (cookies and site data included).
-- **Preferences** (toolbar menu) - set SOCKS host/port (with a dropdown for
-  the two common defaults, or "Custom…" for anything else), whether to
+- **Preferences** (toolbar menu) - set SOCKS host/port, whether to
   destroy the container automatically on browser start, and whether the
-  right-click menu items are shown at all. Settings save automatically as
-  you change them.
+  context menu items are displayed.
 
 ## Known limitations / things worth knowing
 
