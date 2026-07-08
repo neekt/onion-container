@@ -1,0 +1,61 @@
+{
+  "manifest_version": 2,
+  "name": "Onion Container",
+  "version": "1.0.0",
+  "description": "Open links in a dedicated Tor-routed container. Not a privacy/anonymity tool — see README.",
+  "homepage_url": "https://github.com/neekt/onion-container",
+
+  "permissions": [
+    "contextMenus",
+    "contextualIdentities",
+    "cookies",
+    "tabs",
+    "proxy",
+    "storage",
+    "browsingData",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "alarms",
+    "<all_urls>"
+  ],
+
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+
+  "browser_action": {
+    "default_title": "Onion Container",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+
+  "web_accessible_resources": ["blocked.html", "blocked.js"],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{44e9635b-7f69-4654-8e85-59f58b862d0f}",
+      "strict_min_version": "115.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Python (in case any local tooling is added later)
+__pycache__/
+*.pyc
+
+# Packaged extension builds
+*.zip
+*.xpi
+
+# Local web-ext / Firefox debugging artifacts
+web-ext-artifacts/

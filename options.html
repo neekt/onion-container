@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Onion Container — Preferences</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    max-width: 520px;
+    margin: 32px auto;
+    padding: 0 16px;
+    font: 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+  }
+  h1 { font-size: 18px; }
+  h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #888;
+    margin-top: 28px;
+    margin-bottom: 8px;
+  }
+  .field { margin: 12px 0; }
+  label { display: block; font-weight: 600; margin-bottom: 4px; }
+  .hint { color: #888; font-size: 12px; margin-top: 2px; }
+  input[type="text"], select {
+    width: 100%;
+    max-width: 320px;
+    padding: 6px 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+  .checkbox-field { display: flex; align-items: flex-start; gap: 8px; }
+  .checkbox-field input { margin-top: 3px; }
+  .checkbox-field label { font-weight: 400; margin: 0; }
+  #custom-port-row { margin-top: 8px; display: none; }
+  #status {
+    margin-top: 20px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: rgba(46, 125, 50, 0.15);
+    color: #2e7d32;
+    display: none;
+  }
+  .warning {
+    background: rgba(198, 40, 40, 0.1);
+    border-left: 3px solid #c62828;
+    padding: 10px 14px;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+  <h1>Onion Container — Preferences</h1>
+
+  <div class="warning">
+    Reminder: this is not a privacy or anonymity tool. It's a quick way to
+    load a page through a different exit IP. Use Tor Browser if you need
+    actual anonymity protections.
+  </div>
+
+  <h2>Connection</h2>
+
+  <div class="field">
+    <label for="socks-host">SOCKS host</label>
+    <input type="text" id="socks-host" placeholder="127.0.0.1">
+    <div class="hint">Almost always 127.0.0.1 (localhost).</div>
+  </div>
+
+  <div class="field">
+    <label for="socks-port">SOCKS port</label>
+    <select id="socks-port">
+      <option value="9150">9150 — Tor Browser's bundled Tor (default)</option>
+      <option value="9050">9050 — standalone tor daemon</option>
+      <option value="custom">Custom…</option>
+    </select>
+    <div id="custom-port-row">
+      <input type="text" id="socks-port-custom" placeholder="Custom port number">
+    </div>
+  </div>
+
+  <h2>Container behavior</h2>
+
+  <div class="field checkbox-field">
+    <input type="checkbox" id="destroy-on-start">
+    <label for="destroy-on-start">Destroy the Onion container entirely when the browser starts (a fresh one is created next time you use it)</label>
+  </div>
+
+  <h2>Interface</h2>
+
+  <div class="field checkbox-field">
+    <input type="checkbox" id="show-context-menu">
+    <label for="show-context-menu">Show right-click context menu items</label>
+  </div>
+  <div class="hint">The toolbar button's menu always has every action available regardless of this setting.</div>
+
+  <div class="field checkbox-field">
+    <input type="checkbox" id="use-system-notifications">
+    <label for="use-system-notifications">Show OS notifications (in addition to the toolbar badge flash)</label>
+  </div>
+  <div class="hint">Off by default. Actions like "Get new Tor identity" always confirm via a brief badge flash on the toolbar icon regardless of this setting — this just adds OS-level popups on top of that.</div>
+
+  <div id="status">Saved.</div>
+
+  <script src="options.js"></script>
+</body>
+</html>

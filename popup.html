@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    width: 260px;
+    margin: 0;
+    padding: 8px;
+    font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  h1 {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 4px 8px 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #9e9e9e;
+    flex-shrink: 0;
+  }
+  .status-dot.ok { background: #2e7d32; }
+  .status-dot.bad { background: #c62828; }
+  .status-text {
+    font-weight: 400;
+    color: #666;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .exit-ip {
+    font-size: 11px;
+    color: #888;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    margin: -4px 8px 8px;
+    min-height: 1.2em;
+  }
+  .action-status {
+    font-size: 12px;
+    color: #2e7d32;
+    text-align: center;
+    padding: 4px 8px;
+    min-height: 1.2em;
+  }
+  .action-status.error { color: #c62828; }
+  button.item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 10px;
+    margin: 2px 0;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  button.item:hover { background: rgba(127, 127, 127, 0.15); }
+  button.item:disabled { opacity: 0.5; cursor: default; }
+  hr {
+    border: none;
+    border-top: 1px solid rgba(127, 127, 127, 0.25);
+    margin: 6px 4px;
+  }
+  .danger { color: #c62828; }
+</style>
+</head>
+<body>
+  <h1>
+    <span id="status-dot" class="status-dot"></span>
+    Onion Container
+    <span id="status-text" class="status-text"></span>
+  </h1>
+  <div id="exit-ip" class="exit-ip"></div>
+
+  <button class="item" id="btn-open-page">Open this page with Tor proxy</button>
+  <button class="item" id="btn-new-identity">Get new Tor identity (new IP)</button>
+  <button class="item" id="btn-am-i-tor">Am I using Tor?</button>
+
+  <div id="action-status" class="action-status"></div>
+
+  <hr>
+
+  <div id="destroy-section">
+    <button class="item danger" id="btn-destroy">Destroy container…</button>
+    <div id="destroy-confirm" style="display:none; padding: 6px 10px;">
+      <p style="margin: 4px 0; font-size: 12px; color: #c62828;">
+        This closes all tabs in the container and permanently deletes its
+        cookies and site data. This cannot be undone.
+      </p>
+      <button class="item danger" id="btn-destroy-confirm">Yes, destroy it</button>
+      <button class="item" id="btn-destroy-cancel">Cancel</button>
+    </div>
+  </div>
+
+  <hr>
+
+  <button class="item" id="btn-preferences">Preferences</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>
