@@ -5,23 +5,20 @@ A Firefox extension that lets you open links in a container where all traffic is
 Requires Tor Browser or a standalone Tor daemon to be running in the background.
 
 **This is NOT a privacy or anonymity tool.** It's a quick way to load a
-site through a different exit IP - e.g. to potentially avoid things like geoblocking, and
-IP-based rate limit, or a blocked address on your local ISP/network. It
+site through a different exit IP - e.g. to potentially avoid things like geoblocking,
+IP-based rate limiting, or a blocked address on your local ISP/network. It
 does **not** provide Tor Browser's fingerprinting resistance, WebRTC leak
 protection, or the rest of what makes Tor Browser's anonymity set work. If
-you want actual anonymity, use [Tor Browser](https://www.torproject.org/)
-directly.
+you want privacy/anonymity, use [Tor Browser](https://www.torproject.org/).
 
 ## Features
 
-Available from both the toolbar button (all actions) and the right-click
+Available from a toolbar button (all actions) and the context
 menu (a subset, toggleable in Preferences):
 
 - **Open with Tor proxy** - opens the link/page in the Onion container.
 - **Get new Tor identity (new IP)** - rotates to a fresh SOCKS identity, so
   subsequent requests are likely to exit through a different node.
-- **Am I using Tor?** (toolbar only) - opens check.torproject.org in the
-  Onion container.
 - **Destroy container** (toolbar only) - closes all its tabs and
   permanently deletes it (including its cookies and site data), with an
   inline confirmation step. A fresh container is created next time you use
@@ -45,7 +42,7 @@ and reloads if it now succeeds) instead of a blank page. The toolbar button
 also shows a colored status dot (green = connected, red = unreachable, grey
 = checking) reflecting the last check.
 
-## How identity rotation works (no setup required)
+## How identity rotation works
 
 Tor has a built-in option called `IsolateSOCKSAuth`, **on by default**,
 which refuses to reuse a circuit across two connections that present
@@ -75,13 +72,7 @@ blocked.html / blocked.js                      "no Tor connection" fallback page
 The onion shape in the toolbar icon is adapted from Google's
 [Noto Emoji](https://github.com/googlefonts/noto-emoji) 🧅 (U+1F9C5),
 licensed under
-[Apache License 2.0](https://github.com/googlefonts/noto-emoji/blob/main/LICENSE) -
-recolored flat to match the rest of the icon rather than used as
-full-color emoji art. Note: Firefox's `contextualIdentities` API only
-supports a fixed built-in icon set for containers themselves (fingerprint,
-briefcase, etc.), so the "Onion" container shown in Firefox's own container
-list uses the built-in fingerprint icon, not this one - only the toolbar
-button and the `about:addons` listing use the custom icon.
+[Apache License 2.0](https://github.com/googlefonts/noto-emoji/blob/main/LICENSE).
 
 ## 1. Get Tor running
 
@@ -103,41 +94,32 @@ Either of these work - pick whichever's easiest for you:
 Click the toolbar icon, or right-click a link/page:
 
 - **Open with Tor proxy** - opens the link in the Onion container. If Tor
-  isn't reachable, this opens a "No Tor connection detected" page instead
-  (with a Retry button) rather than opening the real page - nothing is sent.
+  isn't reachable, a "No Tor connection detected" page will be displayed.
 - **Get new Tor identity (new IP)** - rotates the SOCKS credentials. Takes
   effect on the *next* request; any tab already open keeps its current
   circuit until you reload it or open a new tab. Confirmed via a brief
   ✓/✗ flash on the toolbar badge (works from the context menu too, not just
   the popup - see Known Limitations for why this doesn't rely on OS
   notifications).
-- **Am I using Tor?** (toolbar only) - opens check.torproject.org in the
-  Onion container, so you can confirm traffic is actually routed through Tor.
 - **Destroy container** (toolbar menu) - click it once to reveal an inline
   "Yes, destroy it" / "Cancel" confirmation; confirming closes all its tabs
   and deletes it outright (cookies and site data included).
-- **Preferences** (toolbar menu) - set SOCKS host/port (with a dropdown for
-  the two common defaults, or "Custom…" for anything else), whether to
+- **Preferences** (toolbar menu) - set SOCKS host/port, whether to
   destroy the container automatically on browser start, and whether the
-  right-click menu items are shown at all. Settings save automatically as
-  you change them.
+  context menu items are displayed.
 
 ## Known limitations / things worth knowing
 
 - **OS notifications are opt-in, off by default** (Preferences → "Show OS
   notifications"). They depend on an OS-level notification daemon being
-  reachable, which isn't guaranteed in every setup - e.g. some sandboxed/
-  `bwrap` Firefox configurations need a D-Bus proxy set up before they work
-  at all. Rather than rely on them, every action that needs visible
+  reachable, which isn't guaranteed in every setup - e.g. some sandboxed
+  Firefox configurations. Rather than rely on them, every action that needs visible
   confirmation (like "Get new Tor identity") always flashes the toolbar
-  badge too, which Firefox renders itself with no OS dependency - that's
-  the primary feedback mechanism; OS notifications are a bonus on top of
-  it, for anyone who wants that in addition.
+  badge too, which Firefox renders itself with no OS dependency.
 - **This is not an anonymity tool.** No fingerprinting resistance, no
   WebRTC leak protection, no traffic padding. Cookies persist in the Tor
-  container across sessions (it's permanent, not per-click), so don't treat
-  identity rotation as equivalent to a clean slate - use "Clear Tor
-  container data" for that.
+  container across sessions if not destroyed. Don't treat
+  identity rotation as equivalent to a clean slate.
 - **Rotation only affects new requests.** Any tab already open when you
   click "Get new Tor identity" keeps its existing circuit - that stream
   already authenticated with the old SOCKS credentials. Reload it or open a
