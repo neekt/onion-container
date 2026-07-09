@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Onion Container",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Open links in a dedicated Tor-routed container. Not a privacy/anonymity tool — see README.",
   "homepage_url": "https://github.com/neekt/onion-container",
 
